@@ -154,7 +154,7 @@
     "url": "https://go-vela.github.io/docs/reference/cli/authentication/",
     "display": "Reference/Cli/Authentication",
     "title": "Authentication",
-    "content": "overview authentication with the vela cli responsibility of client initiating request. each request requires server address user token to be provided. you can provide these variables three ways: configuration file environment flags recommended method for providing api cli. default path found $home/.vela/config.yml. log capture personal token: syntax login --api.addr &lt;vela url&gt; example https://vela-server.localhost generate file: config --api.token &lt;personal token&gt; qwerty123 more information, visit documentation. configure vela_addr variable: export vela_addr=https://vela-server.localhost vela_token vela_token=&lt;personal it&rsquo;s add your terminal profile (~/.bashrc ~/.zshrc) pass as flag argument: "
+    "content": "overview authentication with the vela cli responsibility of client initiating request. each request requires server address. you can provide variable to three ways: configuration file environment flag recommended method for providing api address cli. default path be found $home/.vela/config.yml. log in: syntax login --api.addr &lt;vela url&gt; example https://vela-server.localhost confirm via browser prompt: open your complete (press enter confirm): generate update complete. continue save (existing config will overwritten): more information, visit documentation. variables configure vela_addr variable: export vela_addr=https://vela-server.localhost two prompts as stated above: it&rsquo;s add these terminal profile (~/.bashrc ~/.zshrc) flags "
     },
 
     {
@@ -305,6 +305,20 @@
     },
 
     {
+    "url": "https://go-vela.github.io/docs/reference/api/build/cancel/",
+    "display": "Api/Build/Cancel",
+    "title": "Cancel",
+    "content": "endpoint delete /api/v1/repos/:org/:repo/builds/:build/cancel permissions coming soon! responses status code description 200 indicates the request has succeeded 401 user does not have proper 404 that server was unable to cancel build 500 there an error trying sample section assumes you already know how authenticate api. api, please review authentication documentation. curl -x -h &#34;authorization: bearer &lt;token&gt;&#34; &#34;http://127.0.0.1:8080/api/v1/repos/github/octocat/builds/1/cancel&#34; response &#34;canceled github/octocat/36&#34; "
+    },
+
+    {
+    "url": "https://go-vela.github.io/docs/reference/cli/build/cancel/",
+    "display": "Cli/Build/Cancel",
+    "title": "Cancel",
+    "content": "command vela cancel build &lt;parameters...&gt; for more information, you can run --help. parameters the following are used to configure command: name description environment variables org of organization vela_org, build_org repo repository vela_repo, build_repo number vela_build, build_number output format vela_output, build_output also supports setting via configuration file: please review cli config documentation. permissions coming soon! sample section assumes have already installed setup cli. install cli, installation authentication request --org github --repo octocat --build response canceled github/octocat/1 "
+    },
+
+    {
     "url": "https://go-vela.github.io/docs/plugins/registry/pipeline/captains_log/",
     "display": "Registry/Pipeline/Captains log",
     "title": "Captain's Log",
@@ -330,6 +344,13 @@
     "display": "Pipeline/Steps/Commands",
     "title": "Commands",
     "content": "the commands component part of step for vela. declaration allows you to provide execution instructions run inside container. syntax following an example valid component: version: &#34;1&#34; metadata: template: false steps: name: build image: golang commands: go test ./... pipeline will execute first, then step. using above example, provided are converted simple shell script that looks like: #!/bin/sh set -e turn, executed as docker entrypoint container: --entrypoint=build.sh "
+    },
+
+    {
+    "url": "https://go-vela.github.io/docs/reference/api/pipeline/compile/",
+    "display": "Api/Pipeline/Compile",
+    "title": "Compile",
+    "content": "endpoint post /api/v1/pipelines/:org/:repo/compile parameters the following are used to configure endpoint: name description org of organization repo repository ref file for fetching from source provider output format compiled pipeline configuration permissions coming soon! responses status code 200 indicates request has succeeded 400 unable retrieve compile templates 401 user does not have proper 404 500 system error while retrieving compiling sample section assumes you already know how authenticate api. api, please review authentication documentation. curl -x get -h &#34;authorization: bearer &lt;token&gt;&#34; &#34;http://127.0.0.1:8080/api/v1/pipelines/github/octocat/expand&#34; response notice, when step fields such as image commands will be arranged alphabetical order. version:&#34;1&#34;secrets:-name:go_modulekey:github/octocat/template_secretengine:nativetype:reposteps:-commands:-govet./...&amp;&amp;gitdiff--exit-code;code=$?;gitcheckout--.;(exit$code)-gofmt./...&amp;&amp;gitdiff--exit-code;code=$?;gitcheckout--.;(exit$code)image:golang:latestname:go_validatepull:not_present-commands:-gotest./...image:golang:latestname:go_testpull:not_present-commands:-gobuild-a-ldflags&#39;-extldflags &#34;-static&#34;&#39;-orelease/heyvela{$go_module}image:golang:latestname:go_buildpull:not_presentenvironment:cgo_enabled:&#34;0&#34;goos:linuxtemplates:-name:gosource:github.com/github/octocat/go/template.ymltype:github{ &#34;version&#34;: &#34;1&#34;, &#34;metadata&#34;: {}, &#34;worker&#34;: &#34;secrets&#34;: &#34;name&#34;: &#34;go_module&#34;, &#34;key&#34;: &#34;github/octocat/template_secret&#34;, &#34;engine&#34;: &#34;native&#34;, &#34;type&#34;: &#34;repo&#34;, &#34;origin&#34;: &#34;ruleset&#34;: &#34;if&#34;: &#34;unless&#34;: {} ], &#34;steps&#34;: }, &#34;commands&#34;: &#34;go vet ./... &amp;&amp; git diff --exit-code; code=$?; checkout -- .; (exit $code)&#34;, fmt $code)&#34; &#34;template&#34;: &#34;image&#34;: &#34;golang:latest&#34;, &#34;go_validate&#34;, &#34;pull&#34;: &#34;not_present&#34; test ./...&#34; &#34;go_test&#34;, build -a -ldflags &#39;-extldflags &#34;-static &#34;&#39; -o release/heyvela {$go_module}&#34; &#34;go_build&#34;, &#34;not_present&#34;, &#34;environment&#34;: &#34;cgo_enabled&#34;: &#34;0&#34;, &#34;goos&#34;: &#34;linux&#34; &#34;go-tag_validate&#34;, &#34;go-tag_test&#34;, &#34;go-tag_build&#34;, &#34;templates&#34;: &#34;go&#34;, &#34;source&#34;: &#34;github.com/github/octocat/go/template.yml&#34;, &#34;github&#34; "
     },
 
     {
@@ -431,6 +452,13 @@
     },
 
     {
+    "url": "https://go-vela.github.io/docs/reference/api/pipeline/expand/",
+    "display": "Api/Pipeline/Expand",
+    "title": "Expand",
+    "content": "endpoint post /api/v1/pipelines/:org/:repo/expand parameters the following are used to configure endpoint: name description org of organization repo repository ref file for fetching from source provider output format expanded pipeline configuration permissions coming soon! responses status code 200 indicates request has succeeded 400 unable retrieve expand templates 401 user does not have proper 404 500 system error while retrieving expanding sample section assumes you already know how authenticate api. api, please review authentication documentation. curl -x get -h &#34;authorization: bearer &lt;token&gt;&#34; &#34;http://127.0.0.1:8080/api/v1/pipelines/github/octocat/expand&#34; response notice, when step fields such as image commands will be arranged alphabetical order. version:&#34;1&#34;secrets:-name:go_modulekey:github/octocat/template_secretengine:nativetype:reposteps:-commands:-govet./...&amp;&amp;gitdiff--exit-code;code=$?;gitcheckout--.;(exit$code)-gofmt./...&amp;&amp;gitdiff--exit-code;code=$?;gitcheckout--.;(exit$code)image:golang:latestname:go_validatepull:not_present-commands:-gotest./...image:golang:latestname:go_testpull:not_present-commands:-gobuild-a-ldflags&#39;-extldflags &#34;-static&#34;&#39;-orelease/heyvela{$go_module}image:golang:latestname:go_buildpull:not_presentenvironment:cgo_enabled:&#34;0&#34;goos:linuxtemplates:-name:gosource:github.com/github/octocat/go/template.ymltype:github{ &#34;version&#34;: &#34;1&#34;, &#34;metadata&#34;: {}, &#34;worker&#34;: &#34;secrets&#34;: &#34;name&#34;: &#34;go_module&#34;, &#34;key&#34;: &#34;github/octocat/template_secret&#34;, &#34;engine&#34;: &#34;native&#34;, &#34;type&#34;: &#34;repo&#34;, &#34;origin&#34;: &#34;ruleset&#34;: &#34;if&#34;: &#34;unless&#34;: {} ], &#34;steps&#34;: }, &#34;commands&#34;: &#34;go vet ./... &amp;&amp; git diff --exit-code; code=$?; checkout -- .; (exit $code)&#34;, fmt $code)&#34; &#34;template&#34;: &#34;image&#34;: &#34;golang:latest&#34;, &#34;go_validate&#34;, &#34;pull&#34;: &#34;not_present&#34; test ./...&#34; &#34;go_test&#34;, build -a -ldflags &#39;-extldflags &#34;-static &#34;&#39; -o release/heyvela {$go_module}&#34; &#34;go_build&#34;, &#34;not_present&#34;, &#34;environment&#34;: &#34;cgo_enabled&#34;: &#34;0&#34;, &#34;goos&#34;: &#34;linux&#34; &#34;templates&#34;: &#34;go&#34;, &#34;source&#34;: &#34;github.com/github/octocat/go/template.yml&#34;, &#34;github&#34; "
+    },
+
+    {
     "url": "https://go-vela.github.io/docs/concepts/pipeline/worker/flavor/",
     "display": "Pipeline/Worker/Flavor",
     "title": "Flavor",
@@ -455,7 +483,7 @@
     "url": "https://go-vela.github.io/docs/reference/cli/config/generate/",
     "display": "Cli/Config/Generate",
     "title": "Generate",
-    "content": "command vela generate config &lt;parameters...&gt; &lt;arguments...&gt; for more information, you can run --help. parameters the following are used to configure command: name description environment variables api.addr full url api server vela_addr, config_addr api.token user token from vela_token, config_token api.version version of vela_api_version, config_api_version log.level set level logging vela_log_level, config_log_level output format results vela_output, config_output org organization calls vela_org, config_org repo repository vela_repo, config_repo secret.engine secret engine vela_engine, config_engine secret.type type vela_type, config_type permissions coming soon! sample section assumes have already installed setup cli. install cli, please review installation documentation. authentication request --api.addr https://vela-server.localhost --api.token supersecrettoken response api: addr: token: version: &#34;1&#34; log: level: info "
+    "content": "command vela generate config &lt;parameters...&gt; &lt;arguments...&gt; for more information, you can run --help. parameters the following are used to configure command: name description environment variables api.addr full url api server vela_addr, config_addr api.token.access access token vela_access_token, config_access_token api.token.refresh refresh vela_refresh_token, config_refresh_token api.token pat vela_token, config_token api.version version of vela_api_version, config_api_version log.level set level logging vela_log_level, config_log_level output format results vela_output, config_output org organization calls vela_org, config_org repo repository vela_repo, config_repo secret.engine secret engine vela_engine, config_engine secret.type type vela_type, config_type permissions coming soon! sample section assumes have already installed setup cli. install cli, please review installation documentation. authentication request --api.addr https://vela-server.localhost --log.level info response api: addr: log: level: secret: {} "
     },
 
     {
@@ -484,6 +512,13 @@
     "display": "Api/Hook/Get",
     "title": "Get",
     "content": "endpoint get /api/v1/hooks/:org/:repo parameters the following are used to configure endpoint: name description org of organization repo repository permissions coming soon! responses status code 200 indicates request has succeeded 401 user does not have proper sample section assumes you already know how authenticate api. api, please review authentication documentation. curl -x -h &#34;authorization: bearer &lt;token&gt;&#34; &#34;http://127.0.0.1:8080/api/v1/hooks/github/octocat&#34; response &#34;id&#34;: 2, &#34;repo_id&#34;: 1, &#34;build_id&#34;: &#34;number&#34;: &#34;source_id&#34;: &#34;c8da1302-07d6-11ea-882f-4893bca275b8&#34;, &#34;created&#34;: &#34;1563474076&#34;, &#34;host&#34;: &#34;github.com&#34;, &#34;event&#34;: &#34;push&#34;, &#34;branch&#34;: &#34;master&#34;, &#34;error&#34;: &#34;&#34;, &#34;status&#34;: &#34;success&#34;, &#34;link&#34;: &#34;&#34; }, "
+    },
+
+    {
+    "url": "https://go-vela.github.io/docs/reference/api/pipeline/get/",
+    "display": "Api/Pipeline/Get",
+    "title": "Get",
+    "content": "endpoint get /api/v1/pipelines/:org/:repo parameters the following are used to configure endpoint: name description org of organization repo repository ref file for fetching from source provider output format pipeline configuration permissions coming soon! responses status code 200 indicates request has succeeded 400 unable retrieve 401 user does not have proper 404 500 system error while retrieving sample section assumes you already know how authenticate api. api, please review authentication documentation. curl -x -h &#34;authorization: bearer &lt;token&gt;&#34; &#34;http://127.0.0.1:8080/api/v1/pipelines/github/octocat&#34; response version:&#34;1&#34;steps:-name:helloimage:golangruleset:event:pushcommands:-echo&#34;hello&#34;{ &#34;version&#34;: &#34;1&#34;, &#34;metadata&#34;: {}, &#34;worker&#34;: &#34;steps&#34;: &#34;ruleset&#34;: &#34;if&#34;: &#34;event&#34;: &#34;push&#34; }, &#34;unless&#34;: &#34;matcher&#34;: &#34;filepath&#34;, &#34;operator&#34;: &#34;and&#34; &#34;commands&#34;: &#34;echo &#34;hello &#34;&#34; ], &#34;template&#34;: &#34;image&#34;: &#34;golang&#34;, &#34;name&#34;: &#34;hello&#34;, &#34;pull&#34;: &#34;not_present&#34; "
     },
 
     {
@@ -896,7 +931,7 @@
     "url": "https://go-vela.github.io/docs/reference/cli/config/remove/",
     "display": "Cli/Config/Remove",
     "title": "Remove",
-    "content": "command vela remove config &lt;parameters...&gt; &lt;arguments...&gt; for more information, you can run --help. parameters the following are used to configure command: providing will entire configuration file. name description environment variables api.addr removes api address field vela_addr, config_addr api.token token vela_token, config_token api.version version vela_api_version, config_api_version log.level log level vela_log_level, config_log_level output vela_output, config_output org vela_org, config_org repo vela_repo, config_repo secret.engine secret engine vela_engine, config_engine secret.type type vela_type, config_type permissions coming soon! sample section assumes have already installed setup cli. install cli, please review installation documentation. authentication request response "
+    "content": "command vela remove config &lt;parameters...&gt; &lt;arguments...&gt; for more information, you can run --help. parameters the following are used to configure command: providing will entire configuration file. name description environment variables api.addr removes api address field vela_addr, config_addr api.token.access access token vela_access_token, config_access_token api.token.refresh refresh vela_refresh_token, config_refresh_token api.token vela_token, config_token api.version version vela_api_version, config_api_version log.level log level vela_log_level, config_log_level output vela_output, config_output org vela_org, config_org repo vela_repo, config_repo secret.engine secret engine vela_engine, config_engine secret.type type vela_type, config_type permissions coming soon! sample section assumes have already installed setup cli. install cli, please review installation documentation. authentication request response "
     },
 
     {
@@ -1103,6 +1138,13 @@
     },
 
     {
+    "url": "https://go-vela.github.io/docs/reference/api/pipeline/templates/",
+    "display": "Api/Pipeline/Templates",
+    "title": "Templates",
+    "content": "endpoint get /api/v1/pipelines/:org/:repo/templates parameters the following are used to configure endpoint: name description org of organization repo repository ref file for fetching from source provider output format pipeline templates permissions coming soon! responses status code 200 indicates request has succeeded 400 unable retrieve configuration 401 user does not have proper 404 500 system error while retrieving sample section assumes you already know how authenticate api. api, please review authentication documentation. curl -x -h &#34;authorization: bearer &lt;token&gt;&#34; &#34;http://127.0.0.1:8080/api/v1/pipelines/github/octocat/templates&#34; response some_template:link:https://github.com/github/octocat/blob/master/template.ymlname:some_templatesource:github.com/github/octocat/template.ymltype:github{ &#34;some_template&#34;: &#34;link&#34;: &#34;https://github.com/github/octocat/blob/master/template.yml&#34;, &#34;name&#34;: &#34;some_template&#34;, &#34;source&#34;: &#34;github.com/github/octocat/template.yml&#34;, &#34;type&#34;: &#34;github&#34; }, "
+    },
+
+    {
     "url": "https://go-vela.github.io/docs/plugins/registry/pipeline/terraform/",
     "display": "Registry/Pipeline/Terraform",
     "title": "Terraform",
@@ -1190,7 +1232,7 @@
     "url": "https://go-vela.github.io/docs/reference/cli/config/update/",
     "display": "Cli/Config/Update",
     "title": "Update",
-    "content": "command vela update config &lt;parameters...&gt; &lt;arguments...&gt; for more information, you can run --help. parameters the following are used to configure command: name description environment variables api.addr updates api address field vela_addr, config_addr api.token token vela_token, config_token api.version version vela_api_version, config_api_version log.level log level vela_log_level, config_log_level output vela_output, config_output org vela_org, config_org repo vela_repo, config_repo secret.engine secret engine vela_engine, config_engine secret.type type vela_type, config_type permissions coming soon! sample section assumes have already installed setup cli. install cli, please review installation documentation. authentication request --org github response api: addr: https://vela-server.localhost token: supersecrettoken version: &#34;1&#34; log: level: info org: "
+    "content": "command vela update config &lt;parameters...&gt; &lt;arguments...&gt; for more information, you can run --help. parameters the following are used to configure command: name description environment variables api.addr updates api address field vela_addr, config_addr api.token.access access token vela_access_token, config_access_token api.token.refresh refresh vela_refresh_token, config_refresh_token api.token vela_token, config_token api.version version vela_api_version, config_api_version log.level log level vela_log_level, config_log_level output vela_output, config_output org vela_org, config_org repo vela_repo, config_repo secret.engine secret engine vela_engine, config_engine secret.type type vela_type, config_type permissions coming soon! sample section assumes have already installed setup cli. install cli, please review installation documentation. authentication request --org github response api: addr: https://vela-server.localhost access_token: supersecretaccesstoken refresh_token: supersecretrefreshtoken version: v1 log: level: info secret: {} org: "
     },
 
     {
@@ -1226,6 +1268,13 @@
     "display": "Docs/Usage/Environment",
     "title": "Using the Environment",
     "content": "vela provides the ability to define environment variables scoped individual steps, services secrets. pleas note design be unique per container. does inject variety of default values from build, repo user information. defaults: steps usage following pipeline concepts are being used below: secrets origin note: please warned that ${variable} expressions subject pre-processing. if you do not want pre-processor evaluate your expression it must escaped. version: &#34;1&#34; services: name: redis environment: example: hello, world! image: redis:latest steps: check status commands: can use bash commands in-line set override export example=&#34;hello world team&#34; echo ${example} secrets: origin: private vault target/secret-vault:latest vault_token parameters: addr: vault.example.com auth_method: token username: octocat items: source: secret/docker path: docker "
+    },
+
+    {
+    "url": "https://go-vela.github.io/docs/reference/api/pipeline/validate/",
+    "display": "Api/Pipeline/Validate",
+    "title": "Validate",
+    "content": "endpoint post /api/v1/pipelines/:org/:repo/validate parameters the following are used to configure endpoint: name description org of organization repo repository ref file for fetching from source provider permissions coming soon! responses status code 200 indicates request has succeeded 400 unable retrieve validate pipeline configuration templates 401 user does not have proper 404 500 system error while retrieving validating sample section assumes you already know how authenticate api. api, please review authentication documentation. curl -x get -h &#34;authorization: bearer &lt;token&gt;&#34; &#34;http://127.0.0.1:8080/api/v1/pipelines/github/octocat/validate&#34; response &quot;pipeline valid&quot; "
     },
 
     {
@@ -1323,7 +1372,7 @@
     "url": "https://go-vela.github.io/docs/reference/cli/config/view/",
     "display": "Cli/Config/View",
     "title": "View",
-    "content": "command vela view config &lt;arguments...&gt; for more information, you can run --help. permissions coming soon! sample section assumes have already installed setup the cli. to install cli, please review installation documentation. authentication request response api: addr: https://vela-server.localhost token: supersecrettoken version: &#34;1&#34; log: level: info "
+    "content": "command vela view config &lt;arguments...&gt; for more information, you can run --help. permissions coming soon! sample section assumes have already installed setup the cli. to install cli, please review installation documentation. authentication request response api: addr: https://vela-server.localhost access_token: supersecretaccesstoken refresh_token: supersecretrefreshtoken version: v1 log: level: info secret: {} "
     },
 
     {
