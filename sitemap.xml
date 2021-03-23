@@ -114,7 +114,7 @@
   
   <url>
     <loc>https://go-vela.github.io/docs/reference/yaml/secrets/</loc>
-    <lastmod>2021-02-01T10:38:05-06:00</lastmod>
+    <lastmod>2021-03-15T14:50:43+00:00</lastmod>
   </url>
   
   <url>
@@ -179,7 +179,7 @@
   
   <url>
     <loc>https://go-vela.github.io/docs/reference/cli/repo/add/</loc>
-    <lastmod>2021-02-01T17:58:51-06:00</lastmod>
+    <lastmod>2021-03-15T14:55:05+00:00</lastmod>
   </url>
   
   <url>
@@ -244,7 +244,7 @@
   
   <url>
     <loc>https://go-vela.github.io/docs/usage/docker/</loc>
-    <lastmod>2021-01-20T12:44:38-06:00</lastmod>
+    <lastmod>2021-03-08T09:42:12-06:00</lastmod>
   </url>
   
   <url>
@@ -614,17 +614,17 @@
   
   <url>
     <loc>https://go-vela.github.io/docs/templates/tutorials/starlark/loops_map/</loc>
-    <lastmod>2021-02-22T14:48:58-06:00</lastmod>
+    <lastmod>2021-02-23T08:27:21-06:00</lastmod>
   </url>
   
   <url>
     <loc>https://go-vela.github.io/docs/templates/tutorials/go/loops_slice/</loc>
-    <lastmod>2021-02-22T14:48:58-06:00</lastmod>
+    <lastmod>2021-02-23T08:27:21-06:00</lastmod>
   </url>
   
   <url>
     <loc>https://go-vela.github.io/docs/templates/tutorials/starlark/loops_slice/</loc>
-    <lastmod>2021-02-22T14:48:58-06:00</lastmod>
+    <lastmod>2021-02-23T08:27:21-06:00</lastmod>
   </url>
   
   <url>
@@ -1129,7 +1129,7 @@
   
   <url>
     <loc>https://go-vela.github.io/docs/reference/cli/repo/update/</loc>
-    <lastmod>2021-02-01T17:58:51-06:00</lastmod>
+    <lastmod>2021-03-15T14:55:05+00:00</lastmod>
   </url>
   
   <url>
@@ -1179,7 +1179,7 @@
   
   <url>
     <loc>https://go-vela.github.io/docs/</loc>
-    <lastmod>2020-05-21T16:27:50+00:00</lastmod>
+    <lastmod>2021-03-12T00:20:34+09:00</lastmod>
   </url>
   
   <url>
